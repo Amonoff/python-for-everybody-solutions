@@ -1,35 +1,38 @@
-"""
-Exercise 5.1: Write another program that prompts for a list of numbers as
-above and at the end prints out both the maximum and minimum of the numbers
-instead of the average.
 
-Python for Everybody: Exploring Data Using Python 3
-by Charles R. Severance
 
-Solution by Jamison Lahman, May 28, 2017
-"""
-from exercise5_1 import check_for_float
-
+'''Solution by Amon Ochuka
+Write a program that repeatedly prompts a user for integer numbers until 
+the user enters 'done'. Once 'done' is entered, print out the largest and smallest
+of the numbers. If the user enters anything other than a valid number catch it with 
+a try/except and put out an appropriate message and ignore the number. Enter 7, 2, bob, 
+10, and 4 and match the output below.
+Invalid input
+Maximum is 10
+Minimum is 2
+'''
 # Handles the special case for the first input
-input1 = input('Enter a number: ')
-if input1 == 'done':
+num = input('Enter a number: ')
+if num == 'done':
     quit()                                # Exits if no input
 
-number = check_for_float(input1)          # Ensure input is a float
+number = float(num)          # Ensure input is a float
 
 smallest = number
 largest = number
 
 while True:                               # Stays in loop until break
-    input1 = input('Enter a number: ')
-    if input1 == 'done':
+    num = input('Enter a number: ')
+    if num == 'done':
         break                             # Exits loop
-
-    number = check_for_float(input1)      # Ensure input is a float
-
+    try:
+        number = float(num)      # Ensure input is a float
+    except:
+        print ('Invalid Input')
+        break
     if number > largest:                  # Condition for maximum
         largest = number
     if number < smallest:                 # Condition for minimum
         smallest = number
 
-print(largest, smallest)
+print('Maximum is: ',largest)
+print ('Minimum is: ', smallest)
