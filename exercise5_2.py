@@ -6,30 +6,30 @@ instead of the average.
 Python for Everybody: Exploring Data Using Python 3
 by Charles R. Severance
 
-Solution by Jamison Lahman, May 28, 2017
-"""
-from exercise5_1 import check_for_float
+Solution by Amon Ochuka
+something easier
 
-# Handles the special case for the first input
-input1 = input('Enter a number: ')
-if input1 == 'done':
+num = input('Enter a number: ')
+if num == 'done':
     quit()                                # Exits if no input
 
-number = check_for_float(input1)          # Ensure input is a float
+number = float(num)          # Ensure input is a float
 
 smallest = number
 largest = number
 
 while True:                               # Stays in loop until break
-    input1 = input('Enter a number: ')
-    if input1 == 'done':
+    num = input('Enter a number: ')
+    if num == 'done':
         break                             # Exits loop
-
-    number = check_for_float(input1)      # Ensure input is a float
-
+    try:
+        number = float(num)      # Ensure input is a float
+    except:
+        print ('Invalid Input')
     if number > largest:                  # Condition for maximum
         largest = number
     if number < smallest:                 # Condition for minimum
         smallest = number
 
-print(largest, smallest)
+print('Maximum is: ',largest)
+print ('Minimum is: ', smallest)
