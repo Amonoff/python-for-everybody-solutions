@@ -1,16 +1,10 @@
-"""
-Exercise  10.2: This program counts the distribution of the hour of the day
-for each of the messages. You can pull the hour from the "From" line by finding
-the time string and then splitting that string into parts using the colon
-character. Once you have accumulated the counts for each hour, print out the
-counts, one per line, sorted by hour as shown below.
-
-Sample line: From stephen.marquard@uct.ac.az Sat Jan 05 09:14:16 2008
-
-Sample Execution:
-
-python timeofday.py
-Enter a file name: mbox-short.txt
+''' Write a program to read through the python1.txt and figure out the 
+distribution by hour of the day for each of the messages. You can pull the hour out 
+from the 'From ' line by finding the time and then splitting the string a second 
+time using a colon.
+From stephen.marquard@uct.ac.za Sat Jan  5 09:14:16 2008
+Once you have accumulated the counts for each hour, print out the counts, sorted by
+hour as shown below
 04 3
 06 1
 07 1
@@ -23,40 +17,22 @@ Enter a file name: mbox-short.txt
 17 2
 18 1
 19 1
+'''
+a=list()
+fname=input('Enter file name: ')
+file1=open(fname)
 
-Python for Everybody: Exploring Data Using Python 3
-by Charles R. Severance
+counts=dict()
+for line in file1:
+    if line.startswith('From '):
+        words=line.split()
+        time=words[5]
+        time1=time.split(':')
+        hrs=time1[0]
+        counts[hrs]=counts.get(hrs,0)+1
 
-Solution by Jamison Lahman, June 1, 2017
-"""
-
-
-dictionary_hours = dict()               # Initialize variables
-lst = list()
-
-fname = input('Enter file name: ')
-try:
-    fhand = open(fname)
-except FileNotFoundError:
-    print('File cannot be opened:', fname)
-    quit()
-
-for line in fhand:
-    words = line.split()
-    if len(words) < 2 or words[0] != 'From':
-        continue
-
-    col_pos = words[5].find(':')
-    hour = words[5][:col_pos]
-    if hour not in dictionary_hours:
-        dictionary_hours[hour] = 1      # First entry
-    else:
-        dictionary_hours[hour] += 1     # Additional counts
-
-for key, val in list(dictionary_hours.items()):
-    lst.append((key, val))              # Fills list with hour, count of dict
-
-lst.sort()                              # Sorts by hour
-
-for key, val in lst:
-    print(key, val)
+for k, v in list(counts.items()):
+    a.append((k, v))    
+a.sort()                             
+for k, v in a:
+    print(k, v)
